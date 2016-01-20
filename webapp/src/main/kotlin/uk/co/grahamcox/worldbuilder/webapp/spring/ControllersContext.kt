@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import uk.co.grahamcox.worldbuilder.webapp.DebugController
+import uk.co.grahamcox.worldbuilder.webapp.GraphQLController
 import java.time.Clock
 
 /**
@@ -19,4 +20,11 @@ open class ControllersContext {
     @Autowired
     @Bean
     open fun debugController(clock: Clock) = DebugController(clock)
+
+    /**
+     * Create the GraphQL Controller
+     * @return the GraphQL Controller
+     */
+    @Bean
+    open fun graphqlController() = GraphQLController()
 }
