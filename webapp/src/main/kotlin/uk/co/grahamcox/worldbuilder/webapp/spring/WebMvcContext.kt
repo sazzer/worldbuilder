@@ -8,6 +8,7 @@ import org.springframework.http.converter.*
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter
 import org.springframework.web.servlet.config.annotation.EnableWebMvc
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 /**
@@ -45,7 +46,13 @@ open class WebMvcContext : WebMvcConfigurerAdapter() {
     override fun addResourceHandlers(registry: ResourceHandlerRegistry) {
         registry.addResourceHandler("/api/debug/graphiql/**")
                 .addResourceLocations("classpath:/graphiql/")
-        registry.addResourceHandler("/api/debug/graphiql/")
-                .addResourceLocations("classpath:/graphiql/index.html")
+    }
+
+    /**
+     * Add View Controllers to the spring app
+     */
+    override fun addViewControllers(registry: ViewControllerRegistry) {
+        registry.addViewController("/api/debug/graphiql")
+                .setViewName("/api/debug/graphiql/index.html")
     }
 }

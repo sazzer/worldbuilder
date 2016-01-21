@@ -38,4 +38,12 @@ open class GraphQLController(private val graphqlSchema: GraphQLSchema) {
             ResponseEntity(result.errors, HttpStatus.BAD_REQUEST)
         }
     }
+
+    /**
+     * View mapping to allow a GET request for HTML to the GraphQL endpoint to actually visit the GraphiQL
+     * debugger
+     */
+    @RequestMapping(method = arrayOf(RequestMethod.GET),
+            produces = arrayOf("text/html"))
+    open fun graphiql() = "/api/debug/graphiql"
 }
