@@ -1,5 +1,6 @@
 package uk.co.grahamcox.worldbuilder.webapp.spring
 
+import graphql.schema.GraphQLSchema
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -23,8 +24,9 @@ open class ControllersContext {
 
     /**
      * Create the GraphQL Controller
+     * @param schema The GraphQL schema to use
      * @return the GraphQL Controller
      */
     @Bean
-    open fun graphqlController() = GraphQLController()
+    open fun graphqlController(schema: GraphQLSchema) = GraphQLController(schema)
 }

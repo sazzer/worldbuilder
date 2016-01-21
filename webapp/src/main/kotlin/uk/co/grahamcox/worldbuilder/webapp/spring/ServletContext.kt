@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Import
 @Configuration
 @Import(
         WebMvcContext::class,
+        GraphQLContext::class,
         ControllersContext::class
 )
 open class ServletContext {

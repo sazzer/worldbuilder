@@ -1,10 +1,6 @@
 package uk.co.grahamcox.worldbuilder.webapp
 
 import graphql.GraphQL
-import graphql.Scalars
-import graphql.schema.GraphQLArgument
-import graphql.schema.GraphQLFieldDefinition
-import graphql.schema.GraphQLObjectType
 import graphql.schema.GraphQLSchema
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
@@ -20,53 +16,9 @@ import org.springframework.web.bind.annotation.ResponseBody
  */
 @Controller
 @RequestMapping("/api/graphql")
-open class GraphQLController {
+open class GraphQLController(private val graphqlSchema: GraphQLSchema) {
     /** The logger to use */
     private val LOG = LoggerFactory.getLogger(GraphQLController::class.java)
-
-    /** The GraphQL Schema */
-    val graphqlSchema: GraphQLSchema
-
-    init {
-        val objectType = GraphQLObjectType.newObject()
-                .name("hello")
-                .field(GraphQLFieldDefinition.newFieldDefinition()
-                        .name("name")
-                        .type(Scalars.GraphQLString)
-                        .build()
-                )
-                .field(GraphQLFieldDefinition.newFieldDefinition()
-                        .name("id")
-                        .type(Scalars.GraphQLInt)
-                        .build()
-                )
-                .build()
-
-        val queryType = GraphQLObjectType.newObject()
-                .name("helloWorldQuery")
-                .field(GraphQLFieldDefinition.newFieldDefinition()
-                        .type(objectType)
-                        .name("hello")
-                        .argument(GraphQLArgument.newArgument()
-                                .name("name")
-                                .defaultValue("Graham")
-                                .type(Scalars.GraphQLString)
-                                .build()
-                        )
-                        .argument(GraphQLArgument.newArgument()
-                                .name("id")
-                                .defaultValue(1)
-                                .type(Scalars.GraphQLInt)
-                                .build()
-                        )
-                        .dataFetcher { it.arguments }
-                        .build())
-                .build();
-
-        graphqlSchema = GraphQLSchema.newSchema()
-                .query(queryType)
-                .build()
-    }
 
     /**
      * Actually handle a GraphQL Request
