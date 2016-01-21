@@ -5,56 +5,47 @@ import graphql.schema.GraphQLArgument
 import graphql.schema.GraphQLFieldDefinition
 import graphql.schema.GraphQLObjectType
 import graphql.schema.GraphQLSchema
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.context.ApplicationContext
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import uk.co.grahamcox.worldbuilder.webapp.graphql.ExampleGraphQLQueryHandler
+import uk.co.grahamcox.worldbuilder.webapp.graphql.GraphQLQueryHandler
+import kotlin.collections.forEach
+import kotlin.collections.map
 
 /**
  * Spring Context for the GraphQL Schema
  */
 @Configuration
 open class GraphQLContext {
+    /** Example GraphQL Query Handler  */
+    @Bean
+    open fun exampleHandler() = ExampleGraphQLQueryHandler()
+
     /**
      * Build the GraphQL Schema
      */
+    @Autowired
     @Bean
-    open fun schema(): GraphQLSchema {
-        val objectType = GraphQLObjectType.newObject()
-                .name("hello")
-                .field(GraphQLFieldDefinition.newFieldDefinition()
-                        .name("name")
-                        .type(Scalars.GraphQLString)
-                        .build()
-                )
-                .field(GraphQLFieldDefinition.newFieldDefinition()
-                        .name("id")
-                        .type(Scalars.GraphQLInt)
-                        .build()
-                )
-                .build()
+    open fun schema(applicationContext: ApplicationContext): GraphQLSchema {
+        val queryBuilder = GraphQLObjectType.newObject()
+                .name("worldbuilderQuery")
 
-        val queryType = GraphQLObjectType.newObject()
-                .name("helloWorldQuery")
-                .field(GraphQLFieldDefinition.newFieldDefinition()
-                        .type(objectType)
-                        .name("hello")
-                        .argument(GraphQLArgument.newArgument()
-                                .name("name")
-                                .defaultValue("Graham")
-                                .type(Scalars.GraphQLString)
-                                .build()
-                        )
-                        .argument(GraphQLArgument.newArgument()
-                                .name("id")
-                                .defaultValue(1)
-                                .type(Scalars.GraphQLInt)
-                                .build()
-                        )
-                        .dataFetcher { it.arguments }
-                        .build())
-                .build();
+        val queryHandlers = applicationContext.getBeansOfType(GraphQLQueryHandler::class.java)
+
+        queryHandlers.values.map {
+            val fieldBuilder = GraphQLFieldDefinition.newFieldDefinition()
+                .name(it.queryFieldName())
+                .type(it.queryFieldType())
+                .dataFetcher(it)
+            it.queryFieldArguments().forEach { fieldBuilder.argument(it) }
+
+            fieldBuilder.build()
+        }.forEach { queryBuilder.field(it) }
 
         return GraphQLSchema.newSchema()
-                .query(queryType)
+                .query(queryBuilder.build())
                 .build()
     }
 }
