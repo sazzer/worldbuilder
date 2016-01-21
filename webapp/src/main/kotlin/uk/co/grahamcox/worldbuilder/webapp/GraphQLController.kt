@@ -71,7 +71,9 @@ open class GraphQLController {
     /**
      * Actually handle a GraphQL Request
      */
-    @RequestMapping(method = arrayOf(RequestMethod.POST))
+    @RequestMapping(method = arrayOf(RequestMethod.POST),
+            produces = arrayOf("application/json"),
+            consumes = arrayOf("application/graphql"))
     @ResponseBody
     open fun graphql(@RequestBody query: String) : ResponseEntity<*> {
         LOG.debug("Processing request: {}", query)
