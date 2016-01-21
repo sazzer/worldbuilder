@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.http.converter.*
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter
 import org.springframework.web.servlet.config.annotation.EnableWebMvc
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 /**
@@ -36,5 +37,15 @@ open class WebMvcContext : WebMvcConfigurerAdapter() {
 
         // Then our custom ones
         converters.add(MappingJackson2HttpMessageConverter(objectMapper))
+    }
+
+    /**
+     * Add resource handlers for serving up static files
+     */
+    override fun addResourceHandlers(registry: ResourceHandlerRegistry) {
+        registry.addResourceHandler("/api/debug/graphiql/**")
+                .addResourceLocations("classpath:/graphiql/")
+        registry.addResourceHandler("/api/debug/graphiql/")
+                .addResourceLocations("classpath:/graphiql/index.html")
     }
 }
