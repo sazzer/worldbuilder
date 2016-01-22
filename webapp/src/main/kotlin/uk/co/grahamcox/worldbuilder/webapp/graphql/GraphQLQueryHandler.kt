@@ -7,9 +7,9 @@ import graphql.schema.GraphQLOutputType
 /**
  * Interface describing a GraphQL Query Handler.
  * This explicitly exposes all of the information needed to actually build the Query Field.
- * Because this extends DataFetcher, this acts as the actual handler for the query as well.
+ * If this extends DataFetcher, this acts as the actual handler for the query as well.
  */
-interface GraphQLQueryHandler : DataFetcher {
+interface GraphQLQueryHandler {
     /**
      * The name of the Query Field
      */

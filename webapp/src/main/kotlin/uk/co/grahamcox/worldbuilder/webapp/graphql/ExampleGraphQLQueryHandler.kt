@@ -9,7 +9,7 @@ import kotlin.text.reversed
 /**
  * Example GraphQL Query Handler
  */
-class ExampleGraphQLQueryHandler : GraphQLQueryHandler {
+class ExampleGraphQLQueryHandler : GraphQLQueryHandler, DataFetcher {
     /**
      * The name of the Query Field
      */
