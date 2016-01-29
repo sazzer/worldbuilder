@@ -30,6 +30,13 @@ module.exports = function(grunt) {
                 }]
             }
         },
+        execute: {
+            main: {
+                src: [
+                    'target/server/index.js'
+                ]
+            }
+        },
         jscpd: {
             main: {
                 path: 'src/server'
@@ -38,4 +45,5 @@ module.exports = function(grunt) {
     });
 
     grunt.registerTask('build', ['eslint:main', 'jscpd:main', 'babel:main']);
+    grunt.registerTask('start', ['build', 'execute:main']);
 };
