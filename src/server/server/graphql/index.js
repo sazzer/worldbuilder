@@ -7,7 +7,7 @@ export const schema = new GraphQLSchema({
       hello: {
         type: GraphQLString,
         resolve(parentValue, _, { rootValue: { authentication } }) {
-          return authentication.token;
+          return (authentication || {}).token;
         }
       }
     }
