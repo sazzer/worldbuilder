@@ -8,8 +8,8 @@ const schema = new GraphQLSchema({
     fields: {
       hello: {
         type: GraphQLString,
-        resolve() {
-          return 'world';
+        resolve(parentValue, _, { rootValue: { authentication } }) {
+          return authentication.token;
         }
       }
     }
@@ -18,11 +18,21 @@ const schema = new GraphQLSchema({
 
 const app = express();
 
-app.use('/api/graphql', graphqlHttp({
+app.use((req, res, next) => {
+    req.authentication = {
+        token: req.get('Authorization')
+    };
+    next();
+});
+
+app.use('/api/graphql', graphqlHttp(request => ({
     schema: schema,
     pretty: true,
-    graphiql: true
-}));
+    graphiql: true,
+    rootValue: {
+        authentication: request.authentication
+    }
+})));
 
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!');
