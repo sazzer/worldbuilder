@@ -1,11 +1,14 @@
+import {UserType} from './user';
 import {
+    GraphQLObjectType,
     GraphQLString,
+    GraphQLNonNull,
     GraphQLList
 } from 'graphql';
-import {UserType} from './user';
 
-export const UsersQuery = {
+export const Users = {
     type: new GraphQLList(UserType),
+    description: 'A list of users',
     args: {
         username: {
             type: GraphQLString,
@@ -21,8 +24,8 @@ export const UsersQuery = {
             id: '123',
             username: 'graham',
             email: 'graham@grahamcox.co.uk',
-            created: 'Now',
-            updated: 'Then'
+            created: 'Before',
+            updated: 'After'
         }].filter((u) => {
             let result = true;
             if (username) {
@@ -37,4 +40,4 @@ export const UsersQuery = {
             return result;
         });
     }
-};
+}

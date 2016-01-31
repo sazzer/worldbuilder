@@ -4,13 +4,13 @@ import {
     GraphQLString
 } from 'graphql';
 
-import {UsersQuery} from './usersQuery';
+import {Users} from './users';
 
 export const schema = new GraphQLSchema({
     query: new GraphQLObjectType({
-        name: 'RootQueryType',
+        name: 'Query',
         fields: {
-            users: UsersQuery
+            users: Users
         }
     })
 });
