@@ -1,8 +1,11 @@
 import {
     GraphQLObjectType,
     GraphQLString,
-    GraphQLNonNull
+    GraphQLNonNull,
+    GraphQLList
 } from 'graphql';
+
+import {WorldType} from '../world';
 
 export const UserType = new GraphQLObjectType({
     name: 'User',
@@ -27,6 +30,18 @@ export const UserType = new GraphQLObjectType({
         updated: {
             type: GraphQLString,
             description: 'The date/time that the user was last updated'
+        },
+        worlds: {
+            type: new GraphQLList(WorldType),
+            description: 'The Worlds this this user owns',
+            resolve: ({id}, options) => {
+                return [{
+                    id: id,
+                    name: 'World',
+                    created: 'Yes',
+                    updated: 'No'
+                }];
+            }
         }
     })
 });
