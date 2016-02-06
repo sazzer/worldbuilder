@@ -1,12 +1,15 @@
+
 import express from 'express';
 import {authenticateRequest} from './authentication/middleware';
-import {addRoutes as addWorldRoutes} from './worlds';
+import {addRoutes as addWorldsRoutes} from './worlds';
+import {addRoutes as addUsersRoutes} from './users';
 
 export function createServer() {
     const app = express();
 
     app.use(authenticateRequest);
 
-    addWorldRoutes(app);
+    addWorldsRoutes(app);
+    addUsersRoutes(app);
     return app;
 }
