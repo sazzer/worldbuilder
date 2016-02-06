@@ -1,15 +1,26 @@
-import moment from 'moment-timezone';
-
 /**
  * Model representation of a World
  */
 export class World {
     /**
+     * Construct the world
+     * @param {String} id The ID of the world
+     * @param {String} name The name of the world
+     * @param {Moment} created When the world was created
+     * @param {Moment} updared When the world was updated
+     */
+    constructor({id, name, created, updated}) {
+        this._id = id;
+        this._name = name;
+        this._created = created;
+        this._updated = updated;
+    }
+    /**
      * Get the ID of the World
      * @return {String} the ID
      */
     get id() {
-        return 'abcdef';
+        return this._id;
     }
 
     /**
@@ -17,7 +28,7 @@ export class World {
      * @return {String} the name of the world
      */
     get name() {
-        return 'Discworld';
+        return this._name;
     }
 
     /**
@@ -25,7 +36,7 @@ export class World {
      * @return {Moment} when the world was created
      */
     get created() {
-        return moment('2014-06-01T12:00:00Z');
+        return this._created;
     }
 
     /**
@@ -33,6 +44,6 @@ export class World {
      * @return {Moment} when the world was updated
      */
     get updated() {
-        return moment('2014-06-01T12:00:00Z');
+        return this._updated;
     }
 }

@@ -1,3 +1,4 @@
+import moment from 'moment-timezone';
 import {World} from './world';
 
 /**
@@ -8,7 +9,12 @@ import {World} from './world';
 export function loadWorld(id) {
     return new Promise((resolve, reject) => {
         if (id === 'abcdef') {
-            resolve(new World());
+            resolve(new World({
+                id: id,
+                name: 'Discworld',
+                created: moment('2014-06-01T12:00:00Z'),
+                updated: moment('2014-06-01T12:00:00Z')
+            }));
         } else {
             reject({
                 error: 'UNKNOWN_WORLD'
