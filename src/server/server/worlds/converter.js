@@ -7,7 +7,7 @@ export function convertToHAL(world) {
     return {
         _links: {
             self: {
-                href: `/api/users/${world.id}`
+                href: `/api/worlds/${world.id}`
             }
         },
         name: world.name,
