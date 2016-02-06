@@ -18,12 +18,7 @@
   },
   "homepage": "https://github.com/sazzer/worldbuilder#readme",
   "dependencies": {
-    "express": "^4.13.4",
-    "express-graphql": "^0.4.5",
-    "graphiql": "^0.4.5",
-    "graphql": "^0.4.14",
-    "react": "^0.14.7",
-    "react-dom": "^0.14.7"
+    "express": "^4.13.4"
   },
   "devDependencies": {
     "babel-eslint": "^4.1.6",
