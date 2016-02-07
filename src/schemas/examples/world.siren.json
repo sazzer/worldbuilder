@@ -1,0 +1,41 @@
+{
+    "class": [
+        "world"
+    ],
+    "properties": {
+        "name": "Discworld",
+        "created": "2016-02-07T18:01:49+00:00",
+        "updated": "2016-02-07T18:01:49+00:00"
+    },
+    "entities": [
+        {
+            "class": ["user"],
+            "rel": "/api/rels/owner",
+            "href": "/api/users/1"
+        }, {
+            "class": ["category", "collection"],
+            "rel": "/api/rels/categories",
+            "href": "/api/worlds/12345/categories"
+        }
+    ],
+    "links": [
+        {
+            "rel": "self",
+            "href": "/api/worlds/12345"
+        }
+    ],
+    "actions": [
+        {
+            "name": "add-category",
+            "title": "Add Category",
+            "method": "POST",
+            "href": "/api/worlds/12345/categories",
+            "type": "application/json",
+            "fields": [
+                {
+                    "name": "category", "type": "text"
+                }
+            ]
+        }
+    ]
+}
