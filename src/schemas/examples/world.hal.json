@@ -1,0 +1,44 @@
+{
+    "_links": {
+        "self": {
+            "href": "/api/worlds/12345"
+        },
+        "wb:categories": {
+            "href": "/api/worlds/12345/categories"
+        },
+        "wb:schema": {
+            "href": "/api/rels/worldbuilder/world"
+        },
+        "curies": [{
+            "name": "wb",
+            "href": "/api/rels/worldbuilder/{rel}",
+            "templated": true
+        }]
+    },
+    "name": "Discworld",
+    "created": "2016-02-07T18:01:49+00:00",
+    "updated": "2016-02-07T18:01:49+00:00",
+    "_embedded": {
+        "owner": {
+            "_links": {
+                "self": {
+                    "href": "/api/users/1"
+                },
+                "wb:worlds": {
+                    "href": "/api/users/1/worlds"
+                },
+                "wb:schema": {
+                    "href": "/api/rels/worldbuilder/user"
+                },
+                "curies": [{
+                    "name": "wb",
+                    "href": "/api/rels/worldbuilder/{rel}",
+                    "templated": true
+                }]
+            },
+            "name": "Terry Pratchett",
+            "created": "2016-02-07T18:01:49+00:00",
+            "updated": "2016-02-07T18:01:49+00:00",
+        }
+    }
+}

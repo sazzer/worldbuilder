@@ -1,0 +1,46 @@
+{
+    "data": {
+        "type": "world",
+        "id": "12345",
+        "attributes": {
+            "name": "Discworld",
+            "created": "2016-02-07T18:01:49+00:00",
+            "updated": "2016-02-07T18:01:49+00:00"
+        },
+        "relationships": {
+            "owner": {
+                "data": {
+                    "type": "user",
+                    "id": "1"
+                },
+                "links": {
+                    "self": "/api/worlds/12345/relationships/owner",
+                    "related": "/api/worlds/12345/owner"
+                }
+            },
+            "categories": {
+                "links": {
+                    "self": "/api/worlds/12345/relationships/categories",
+                    "related": "/api/worlds/12345/categories"
+                }
+            }
+        }
+    },
+    "links": {
+        "self": "/api/worlds/12345"
+    },
+    "included": [
+        {
+            "type": "user",
+            "id": "1",
+            "attributes": {
+                "name": "Terry Pratchett",
+                "created": "2016-02-07T18:01:49+00:00",
+                "updated": "2016-02-07T18:01:49+00:00",
+            },
+            "links": {
+                "self": "/api/users/1"
+            }
+        }
+    ]
+}
