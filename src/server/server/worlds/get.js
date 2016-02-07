@@ -1,5 +1,5 @@
 import {loadWorld} from '../../worlds/worldDao';
-import {convertToHAL} from './converter';
+import {convertToAPI} from './converter';
 
 const ERROR_STATUSES = {
     UNKNOWN_WORLD: 404
@@ -15,8 +15,8 @@ export function getWorld(req, res, next) {
     const worldId = req.params.world;
 
     loadWorld(worldId).then((world) => {
-        res.set('Content-Type', 'application/hal+json');
-        res.send(convertToHAL(world));
+        res.set('Content-Type', 'application/vnd.api+json');
+        res.send(convertToAPI(world));
     }).catch((error) => {
         res.set('Content-Type', 'application/json');
         res.status(ERROR_STATUSES[error.error] || 400);

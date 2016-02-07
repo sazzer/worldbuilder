@@ -1,5 +1,5 @@
 import {loadUser} from '../../users/userDao';
-import {convertToHAL} from './converter';
+import {convertToAPI} from './converter';
 
 const ERROR_STATUSES = {
     UNKNOWN_USER: 404
@@ -15,8 +15,8 @@ export function getUser(req, res, next) {
     const userId = req.params.user;
 
     loadUser(userId).then((user) => {
-        res.set('Content-Type', 'application/hal+json');
-        res.send(convertToHAL(user));
+        res.set('Content-Type', 'application/vnd.api+json');
+        res.send(convertToAPI(user));
     }).catch((error) => {
         res.set('Content-Type', 'application/json');
         res.status(ERROR_STATUSES[error.error] || 400);
