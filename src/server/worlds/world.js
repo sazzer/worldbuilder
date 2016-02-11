@@ -35,4 +35,12 @@ export class World {
     get updated() {
         return moment('2014-06-01T12:00:00Z');
     }
+    
+    /**
+     * Get the ID of the user that owns this world
+     * @return {String} The ID of the owner
+     */
+    get owner() {
+        return '987654';
+    }
 }
